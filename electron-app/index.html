@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello World!</title>
+    <link href="styles.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <!-- <h1>Hello World!</h1>
     We are using io.js <script>document.write(process.version)</script>
-    and Electron <script>document.write(process.versions['electron'])</script>.
+    and Electron <script>document.write(process.versions['electron'])</script>. -->
 
-    <script type="text/javascript" src="../scalajs/target/scala-2.11/scala-js-electron-skeleton-jsdeps.js"
+    <div class="title-bar"></div>
+    <div class="search-bar">
+    </div>
+
+    <div class="side-bar">
+    </div>
+
+    <script type="text/javascript" src="../scalajs/target/scala-2.11/iconic-jsdeps.js"
       onload="window.$ = window.jQuery = module.exports;" ></script>
-    <script type="text/javascript" src="../scalajs/target/scala-2.11/scala-js-electron-skeleton-fastopt.js"></script>
+    <script type="text/javascript" src="../scalajs/target/scala-2.11/iconic-fastopt.js"></script>
     <script type="text/javascript">
-      com.example.electronapp.Renderer().main();
+      me.selinali.iconic.Renderer().main();
     </script>
 
   </body>

@@ -12,9 +12,9 @@ object Renderer {
 
   @JSExport
   def main(): Unit = {
-    jQuery("body").append("<p>Hello World from Scala.js</p>")
-    val filenames = listFiles(".")
-    display(filenames)
+//    jQuery("body").append("<p>Hello World from Scala.js</p>")
+//    val filenames = listFiles(".")
+//    display(filenames)
   }
 
   def display(filenames: Seq[String]) = {

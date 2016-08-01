@@ -152,9 +152,12 @@ object BrowserWindow {
 
   val browserWindow = g.require("electron").BrowserWindow.asInstanceOf[js.Dynamic]
 
-  def apply(width: Int = 800, height: Int = 600, show: Boolean = true, icon: String = null): BrowserWindow = {
+  def apply(width: Int = 600, height: Int = 420,
+            show: Boolean = true,
+            icon: String = null,
+            titleBarStyle: String = null): BrowserWindow = {
     js.Dynamic.newInstance(browserWindow)(
-      js.Dynamic.literal(width = width, height = height, show = show, icon = icon)
+      js.Dynamic.literal(width = width, height = height, show = show, icon = icon, titleBarStyle = titleBarStyle)
     ).asInstanceOf[BrowserWindow]
   }
 

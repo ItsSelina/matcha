@@ -1,0 +1,21 @@
+body {
+  margin: 0px;
+  -webkit-app-region: drag;
+}
+
+.search-bar {
+  height: 38px;
+  border-bottom: thin solid #eee;
+  border-top: thin solid #eee;
+}
+
+.title-bar {
+  height: 22px;
+}
+
+.side-bar {
+  /*display: inline-block;*/
+  width: 50px;
+  height: 100%;
+  border-right: thin solid #eee;
+}
