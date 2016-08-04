@@ -6,6 +6,7 @@ import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 import scala.scalajs.js
+import scala.scalajs.js.JSON
 
 object MaterialIcons {
 
@@ -22,9 +23,9 @@ object MaterialIcons {
   private val RequiredSubfolders = Set(
     "drawable-hdpi",
     "drawable-mdpi",
-    "drawable-xdpi",
-    "drawable-xxdpi",
-    "drawable-xxxdpi",
+    "drawable-xhdpi",
+    "drawable-xxhdpi",
+    "drawable-xxxhdpi",
     "svg"
   )
 
@@ -34,45 +35,27 @@ object MaterialIcons {
 
   def fetchCategory(name: String): Future[Category] = fetchIcons(name).map(Category(name, _))
 
-  private def fetchCategoryNames(): Future[List[String]] = {
+  def fetchCategoryNames(): Future[List[String]] = {
     Ajax.get(treeEndpoint("master")).map(xhr => xhr.responseText).flatMap(parseCategories)
   }
 
   private def parseCategories(jsonString: String): Future[List[String]] = {
-//    val root = js.JSON.parse(jsonString)
-//    val tree = root.tree.asInstanceOf[js.Array[js.Dynamic]]
-//    val jjj = tree.filter(_.`type`.toString.equals("tree"))
-//        .map(e => {
-//          Ajax.get(e.url.toString)
-//              .map(xhr => {
-//                js.JSON.parse(xhr.responseText).tree.asInstanceOf[js.Array[js.Dynamic]]
-//              })
-//              .collect { case a =>
-//                if (RequiredSubfolders subsetOf subfolders.map(_.path.toString).toSet) e
-//              }
-//        })
-//    j
-//    ???
     val root = js.JSON.parse(jsonString)
     val tree = root.tree.asInstanceOf[js.Array[js.Dynamic]]
-    Future.sequence(tree.filter(_.`type`.toString.equals("tree"))
-        .map(item => Ajax.get(item.url.toString)
-            .map(xhr => js.JSON.parse(xhr.responseText).tree.asInstanceOf[js.Array[js.Dynamic]])
-            .map(innerTree => {
-              if (RequiredSubfolders subsetOf innerTree.map(_.path.toString).toSet) {
-                Some(item)
-              } else {
-                None
-              }
-            })).toList).map(a => a.flatten.map(a => a.path.toString))
+    Future.sequence(tree
+        .filter(_.`type`.toString.equals("tree"))
+        .map(item => {
+          Ajax.get(item.url.toString)
+              .map(xhr => {
+                val subfolders = js.JSON.parse(xhr.responseText).tree.asInstanceOf[js.Array[js.Dynamic]].map(_.path.toString).toSet
+                if (RequiredSubfolders subsetOf subfolders) {
+                  Some(item)
+                } else {
+                  None
+                }
+              })
+        }).toList).map(a => a.flatten.map(a => a.path.toString))
   }
-
-  /*
-  Ajax.get(elem.url.toString).map(xhr => {
-          val subfolders = js.JSON.parse(xhr.responseText).tree.asInstanceOf[js.Array[js.Dynamic]]
-          RequiredSubfolders subsetOf subfolders.map(_.path.toString).toSet
-        }
-   */
 
   private def fetchIcons(categoryName: String): Future[List[Icon]] = {
     Ajax.get(contentsEndpoint(categoryName)).flatMap(xhr => {
