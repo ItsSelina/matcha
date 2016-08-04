@@ -10,8 +10,13 @@ scalaVersion := "2.11.8"
 
 scalaJSUseRhino in Global := false
 
-libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.9.0"
-libraryDependencies += "be.doeraene" %%% "scalajs-jquery" % "0.9.0"
+logBuffered in Test := false
+
+libraryDependencies ++= Seq(
+  "org.scala-js" %%% "scalajs-dom" % "0.9.0",
+  "be.doeraene" %%% "scalajs-jquery" % "0.9.0",
+  "org.scalatest" %%% "scalatest" % "3.0.0" % "test"
+)
 
 jsDependencies += RuntimeDOM
 jsDependencies += "org.webjars" % "jquery" % "2.2.4" / "2.2.4/jquery.js"

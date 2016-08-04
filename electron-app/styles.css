@@ -3,6 +3,23 @@ body {
   -webkit-app-region: drag;
 }
 
+ul {
+  list-style-type: none;
+  margin: 18px;
+  padding: 0px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #757575;
+  font-size: 12px;
+  font-family: 'Roboto';
+}
+
+li {
+  margin: 6px;
+}
+
 .search-bar {
   height: 38px;
   border-bottom: thin solid #eee;
@@ -14,8 +31,10 @@ body {
 }
 
 .side-bar {
-  /*display: inline-block;*/
-  width: 50px;
+  display: inline-block;
   height: 100%;
+  overflow-y: scroll;
+  position: fixed;
+  top: 38px;
   border-right: thin solid #eee;
 }
