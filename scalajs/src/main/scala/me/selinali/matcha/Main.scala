@@ -1,4 +1,4 @@
-package me.selinali.iconic
+package me.selinali.matcha
 
 import io.atom.electron.BrowserWindow
 

@@ -1,4 +1,4 @@
-package me.selinali.iconic
+package me.selinali.matcha
 
 
 import scala.scalajs.js
@@ -16,7 +16,7 @@ object Renderer {
 
   @JSExport
   def main(): Unit = {
-    MaterialIcons.fetchCategoryNames().onComplete {
+    IconApi.fetchCategoryNames().onComplete {
       case Success(names) => bindCategories(names)
       case Failure(e) => println(e.getCause)
     }

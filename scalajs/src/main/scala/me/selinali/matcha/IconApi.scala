@@ -1,4 +1,4 @@
-package me.selinali.iconic
+package me.selinali.matcha
 
 import org.scalajs.dom.ext.Ajax
 
@@ -8,7 +8,7 @@ import scala.concurrent.duration.Duration
 import scala.scalajs.js
 import scala.scalajs.js.JSON
 
-object MaterialIcons {
+object IconApi {
 
   case class Icon(name: String, svg: String)
 

@@ -2,7 +2,7 @@ import java.nio.charset.Charset
 
 enablePlugins(ScalaJSPlugin)
 
-name := "iconic"
+name := "matcha"
 
 version := "1.0"
 

@@ -1,11 +1,11 @@
-package me.selinali.iconic
+package me.selinali.matcha
 
-import me.selinali.iconic.MaterialIcons._
+import me.selinali.matcha.IconApi._
 import org.scalatest._
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.time.{Millis, Seconds, Span}
 
-class MaterialIconsTest extends FunSuite with Matchers with ScalaFutures {
+class IconApiTest extends FunSuite with Matchers with ScalaFutures {
 
   private implicit val Patience = PatienceConfig(timeout = Span(5, Seconds), interval = Span(500, Millis))
 
