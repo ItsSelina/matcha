@@ -6,7 +6,6 @@ import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
 
 trait CategoryView {
-//  def setupClickEvents()
   def bindCategoriesToSideBar(namesHtml: String)
   def bindIcons(iconsHtml: String)
   def highlightCurrentCategory()
@@ -23,7 +22,6 @@ class CategoryPresenter(view: CategoryView) {
         storedCategories = categories
         bindCategories(categories.map(_.name))
         setCurrentCategory(categories.head)
-        println("Successfully loaded categories")
       case Failure(e) => println(e.getCause)
     }
   }

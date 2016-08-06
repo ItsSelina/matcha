@@ -13,6 +13,7 @@ object IconApi {
   case class Category(name: String, icons: List[Icon])
 
   private val BASE_URL = "https://api.github.com/repos/google/material-design-icons"
+  private val ICONS_LIST_ENDPOINT = "https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/codepoints"
 
   private def treeEndpoint(sha1: String) = s"$BASE_URL/git/trees/$sha1"
 
@@ -61,7 +62,15 @@ object IconApi {
       val items = root.asInstanceOf[js.Array[js.Dynamic]]
       Future.sequence(items.filter(elem => elem.name.toString.contains("48"))
           .map(elem => Ajax.get(elem.download_url.toString).map(xhr => Icon(extractName(elem.name.toString), xhr.responseText)))
-          .toList)
+          .toList).zip(fetchIconList()).map { case (fetchedIcons, actualIcons) =>
+          fetchedIcons.filter(icon => actualIcons.contains(icon.name))
+      }
+    })
+  }
+
+  def fetchIconList(): Future[Set[String]] = {
+    Ajax.get(ICONS_LIST_ENDPOINT).map(xhr => {
+      xhr.responseText.split('\n').toList.map(_.split(' ').head.replace('_', ' ')).toSet
     })
   }
 
