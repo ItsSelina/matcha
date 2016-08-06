@@ -1,47 +1,36 @@
 package me.selinali.matcha
 
-
-import me.selinali.matcha.IconApi.Category
+import org.scalajs.dom.raw.Element
+import org.scalajs.jquery._
 
 import scala.scalajs.js
-import org.scalajs.jquery.jQuery
-
-import js.Dynamic.{global => g}
 import js.annotation.JSExport
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.util.{Failure, Success}
 
 @JSExport
-object Renderer {
+object Renderer extends CategoryView {
 
-  val fs = g.require("fs")
+  val Presenter = new CategoryPresenter(this)
 
   @JSExport
-  def main(): Unit = {
-    IconApi.fetchCategoryNames().onComplete {
-      case Success(names) => bindCategories(names)
-      case Failure(e) => println(e.getCause)
-    }
-
-    IconApi.fetchCategories().onComplete {
-      case Success(categories) => bindIcons(categories.head)
-      case Failure(e) => println(e.getCause)
-    }
+  def main() = {
+    Presenter.loadCategories()
+    jQuery(".side-bar").on("click", "a", (e: JQueryEventObject) => onCategoryClick(e.target.asInstanceOf[Element].id))
   }
 
-  def bindCategories(names: List[String]) = {
-    val items = ("All" :: names).map("<li><a href=\"#\">" + _.capitalize + "</a></li>\n").mkString
-    jQuery(".side-bar").append(s"<ul>\n$items</ul>")
+  def onCategoryClick(id: String) = {
+    println("ButtonClicked, id is " + id)
+    Presenter.itemClicked(id)
   }
 
-  def bindIcons(category: Category) = {
-    val items = category.icons
-        .map(icon => "<i class=\"material-icons md-36 md-dark\">" + icon.name.replace(' ', '_') + "</i>\n")
-        .mkString
-    jQuery(".icon-container").append(items)
+  override def bindCategoriesToSideBar(namesHtml: String) = {
+    jQuery(".side-bar").append(namesHtml)
   }
 
-  def listFiles(path: String): Seq[String] = {
-    fs.readdirSync(path).asInstanceOf[js.Array[String]]
+  override def bindIcons(iconsHtml: String) = {
+    jQuery(".icon-container").empty().append(iconsHtml)
+  }
+
+  override def highlightCurrentCategory() = {
+
   }
 }

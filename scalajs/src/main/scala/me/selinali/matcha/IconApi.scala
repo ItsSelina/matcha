@@ -33,7 +33,7 @@ object IconApi {
 
   def fetchCategory(name: String): Future[Category] = fetchIcons(name).map(Category(name, _))
 
-  def fetchCategoryNames(): Future[List[String]] = {
+  private def fetchCategoryNames(): Future[List[String]] = {
     Ajax.get(treeEndpoint("master")).map(xhr => xhr.responseText).flatMap(parseCategories)
   }
 
