@@ -33,8 +33,32 @@ li {
 .side-bar {
   display: inline-block;
   height: 100%;
+  top: 61px;
+  width: 135px;
   overflow-y: scroll;
   position: fixed;
-  top: 38px;
   border-right: thin solid #eee;
+}
+
+.icon-container {
+  display: inline-block;
+  height: 100%;
+  top: 61px;
+  left: 136px;
+  padding: 22px;
+  width: 500px;
+  overflow-y: scroll;
+  position: fixed;
+}
+
+.material-icons {
+  margin: 16px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
 }

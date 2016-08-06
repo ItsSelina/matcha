@@ -1,6 +1,8 @@
 package me.selinali.matcha
 
 
+import me.selinali.matcha.IconApi.Category
+
 import scala.scalajs.js
 import org.scalajs.jquery.jQuery
 
@@ -20,11 +22,23 @@ object Renderer {
       case Success(names) => bindCategories(names)
       case Failure(e) => println(e.getCause)
     }
+
+    IconApi.fetchCategories().onComplete {
+      case Success(categories) => bindIcons(categories.head)
+      case Failure(e) => println(e.getCause)
+    }
   }
 
   def bindCategories(names: List[String]) = {
-    val items = names.map("<li><a href=\"#\">" + _.capitalize + "</a></li>\n").mkString
+    val items = ("All" :: names).map("<li><a href=\"#\">" + _.capitalize + "</a></li>\n").mkString
     jQuery(".side-bar").append(s"<ul>\n$items</ul>")
+  }
+
+  def bindIcons(category: Category) = {
+    val items = category.icons
+        .map(icon => "<i class=\"material-icons md-36 md-dark\">" + icon.name.replace(' ', '_') + "</i>\n")
+        .mkString
+    jQuery(".icon-container").append(items)
   }
 
   def listFiles(path: String): Seq[String] = {

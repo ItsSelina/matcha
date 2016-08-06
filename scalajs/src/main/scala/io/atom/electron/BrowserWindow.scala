@@ -152,7 +152,7 @@ object BrowserWindow {
 
   val browserWindow = g.require("electron").BrowserWindow.asInstanceOf[js.Dynamic]
 
-  def apply(width: Int = 600, height: Int = 420,
+  def apply(width: Int = 640, height: Int = 480,
             show: Boolean = true,
             icon: String = null,
             titleBarStyle: String = null): BrowserWindow = {

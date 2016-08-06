@@ -31,7 +31,7 @@ object Main extends JSApp {
     // initialization and is ready to create browser windows.
     app.on("ready", () => {
       // Create the browser window.
-      mainWindow = BrowserWindow(width = 600, height = 420, titleBarStyle = "hidden")
+      mainWindow = BrowserWindow(width = 680, height = 500, titleBarStyle = "hidden")
 
       // and load the index.html of the app.
       mainWindow.loadURL("file://" + g.__dirname + "/index.html")

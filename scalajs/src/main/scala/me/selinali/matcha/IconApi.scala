@@ -2,11 +2,9 @@ package me.selinali.matcha
 
 import org.scalajs.dom.ext.Ajax
 
-import scala.concurrent.{Await, Future}
+import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration.Duration
 import scala.scalajs.js
-import scala.scalajs.js.JSON
 
 object IconApi {
 
@@ -62,8 +60,12 @@ object IconApi {
       val root = js.JSON.parse(xhr.responseText)
       val items = root.asInstanceOf[js.Array[js.Dynamic]]
       Future.sequence(items.filter(elem => elem.name.toString.contains("48"))
-          .map(elem => Ajax.get(elem.download_url.toString).map(xhr => Icon(elem.name.toString, xhr.responseText)))
+          .map(elem => Ajax.get(elem.download_url.toString).map(xhr => Icon(extractName(elem.name.toString), xhr.responseText)))
           .toList)
     })
+  }
+
+  private def extractName(rawName: String): String = {
+    rawName.split('_').filter(elem => !elem.equals("ic") && !elem.contains("px")).mkString(" ")
   }
 }
