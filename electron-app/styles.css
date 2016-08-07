@@ -42,12 +42,12 @@ li {
 
 .icon-container {
   display: inline-block;
-  height: 100%;
   top: 61px;
   left: 136px;
   padding: 22px;
+  height: 396px;
   width: 500px;
-  overflow-y: scroll;
+  overflow: auto;
   position: fixed;
 }
 
