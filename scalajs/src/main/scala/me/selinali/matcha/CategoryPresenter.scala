@@ -27,9 +27,7 @@ class CategoryPresenter(view: CategoryView) {
   }
 
   def itemClicked(id: String) = {
-    println("Id is " + id)
     setCurrentCategory(storedCategories.filter(category => category.name.equals(id)).head)
-    println("Changed page")
   }
 
   private def setCurrentCategory(category: Category) = {
@@ -46,7 +44,8 @@ class CategoryPresenter(view: CategoryView) {
   }
 
   private def bindIcons(icons: List[Icon]) = {
-    val items = icons.map(icon => "<i class=\"material-icons md-36 md-dark\">" + icon.name.replace(' ', '_') + "</i>\n").mkString
+    val items = icons.map(icon => "<span id='icon-container' <i class=\"material-icons md-36 md-dark\">" +
+        icon.name.replace(' ', '_') + "</i></span>\n").mkString
     view.bindIcons(items)
   }
 }

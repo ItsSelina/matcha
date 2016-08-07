@@ -11,7 +11,8 @@ ul {
 
 ul li a {
   text-decoration: none;
-  color: #757575;
+  color: #9E9E9E;
+  font-weight: 500;
   font-size: 12px;
   font-family: 'Roboto';
 }
@@ -61,4 +62,9 @@ li {
 
 .material-icons.md-dark {
   color: rgba(0, 0, 0, 0.54);
+}
+
+.sidebar-item-selected {
+  font-weight: 900 !important;
+  color: #616161;
 }

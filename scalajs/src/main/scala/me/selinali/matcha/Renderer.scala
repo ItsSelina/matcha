@@ -14,12 +14,16 @@ object Renderer extends CategoryView {
   @JSExport
   def main() = {
     Presenter.loadCategories()
-    jQuery(".side-bar").on("click", "a", (e: JQueryEventObject) => onCategoryClick(e.target.asInstanceOf[Element].id))
+    jQuery(".side-bar").on("click", "a", (e: JQueryEventObject) => {
+      onCategoryClick(e.target.asInstanceOf[Element])
+    })
   }
 
-  def onCategoryClick(id: String) = {
-    println("ButtonClicked, id is " + id)
-    Presenter.itemClicked(id)
+  def onCategoryClick(element: Element) = {
+    val selectedItemClass = "sidebar-item-selected"
+    jQuery(s".side-bar>ul>li>a.$selectedItemClass").removeClass(selectedItemClass)
+    jQuery(element).addClass(selectedItemClass)
+    Presenter.itemClicked(element.id)
   }
 
   override def bindCategoriesToSideBar(namesHtml: String) = {
