@@ -9,7 +9,6 @@ import scala.util.{Failure, Success}
 trait CategoryView {
   def renderSideBar(namesHtml: String)
   def renderIcons(iconsHtml: String)
-  def highlightCurrentCategory()
 }
 
 class CategoryPresenter(view: CategoryView) {
@@ -21,7 +20,7 @@ class CategoryPresenter(view: CategoryView) {
     IconApi.fetchCategories().onComplete {
       case Success(cs) =>
         Categories = Category.toMap(cs)
-        bindCategoryNames(Categories.keySet.toList)
+        bindCategoriesToSideBar(Categories.keySet.toList)
         itemClicked(All)
       case Failure(e) => println(e.getCause)
     }
@@ -45,9 +44,9 @@ class CategoryPresenter(view: CategoryView) {
     "<i class=\"material-icons md-36 md-dark\">" + icon.name.replace(' ', '_') + "</i>\n"
   }
 
-  private def bindCategoryNames(names: List[String]) = {
+  private def bindCategoriesToSideBar(names: List[String]) = {
     val formatter = (s: String, n: String) => s"$s\n<li><a id='$n' href='#'>${n.capitalize}</a></li>"
-    val items = (All :: names).foldLeft("")(formatter)
-    view.renderSideBar(s"<ul>\n$items</ul>")
+    val items = names.foldLeft("")(formatter)
+    view.renderSideBar(s"<ul>\n<li><a id='All' class='sidebar-item-selected' href='#'>All</a></li>\n$items</ul>")
   }
 }

@@ -33,8 +33,4 @@ object Renderer extends CategoryView {
   override def renderIcons(iconsHtml: String) = {
     jQuery(".icon-container").empty().append(iconsHtml)
   }
-
-  override def highlightCurrentCategory() = {
-
-  }
 }
