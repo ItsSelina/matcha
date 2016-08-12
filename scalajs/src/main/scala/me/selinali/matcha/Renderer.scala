@@ -26,11 +26,11 @@ object Renderer extends CategoryView {
     Presenter.itemClicked(element.id)
   }
 
-  override def bindCategoriesToSideBar(namesHtml: String) = {
+  override def renderSideBar(namesHtml: String) = {
     jQuery(".side-bar").append(namesHtml)
   }
 
-  override def bindIcons(iconsHtml: String) = {
+  override def renderIcons(iconsHtml: String) = {
     jQuery(".icon-container").empty().append(iconsHtml)
   }
 

@@ -2,6 +2,7 @@ package me.selinali.matcha
 
 import org.scalajs.dom.ext.Ajax
 
+import scala.collection.SortedMap
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.scalajs.js
@@ -9,8 +10,11 @@ import scala.scalajs.js
 object IconApi {
 
   case class Icon(name: String, svg: String)
-
   case class Category(name: String, icons: List[Icon])
+
+  object Category {
+    def toMap(cs: List[Category]): SortedMap[String, List[Icon]] = cs.map(c => (c.name, c.icons))(collection.breakOut)
+  }
 
   private val BASE_URL = "https://api.github.com/repos/google/material-design-icons"
   private val ICONS_LIST_ENDPOINT = "https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/codepoints"

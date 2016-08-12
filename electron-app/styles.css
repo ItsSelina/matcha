@@ -65,6 +65,16 @@ li {
 }
 
 .sidebar-item-selected {
-  font-weight: 900 !important;
+  font-weight: 700 !important;
   color: #616161;
+}
+
+.category-header {
+  color: #9E9E9E;
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  margin-left: 16px;
+  margin-top: 26px;
+  margin-bottom: 8px;
 }
