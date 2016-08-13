@@ -64,7 +64,7 @@ object IconApi {
     Ajax.get(contentsEndpoint(categoryName)).flatMap(xhr => {
       val root = js.JSON.parse(xhr.responseText)
       val items = root.asInstanceOf[js.Array[js.Dynamic]]
-      Future.sequence(items.filter(elem => elem.name.toString.contains("48"))
+      Future.sequence(items.filter(elem => elem.name.toString.contains("24"))
           .map(elem => Ajax.get(elem.download_url.toString).map(xhr => Icon(extractName(elem.name.toString), xhr.responseText)))
           .toList).zip(fetchIconList()).map { case (fetchedIcons, actualIcons) =>
           fetchedIcons.filter(icon => actualIcons.contains(icon.name))

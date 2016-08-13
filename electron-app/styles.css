@@ -21,10 +21,37 @@ li {
   margin: 6px;
 }
 
-.search-bar {
+.search-bar-container {
+  padding-left: 20px;
+  padding-right: 20px;
   height: 38px;
   border-bottom: thin solid #eee;
   border-top: thin solid #eee;
+}
+
+.search-bar {
+  height: 38px;
+  width: 590px;
+  font-family: 'Roboto';
+  font-size: 16px;
+  color: #616161;
+  border: none;
+  outline: none;
+  padding: 0px 0px 0px 2px;
+  position: absolute;
+}
+
+.search-icon {
+  margin: 7px !important;
+}
+
+.material-icons.light-gray {
+  color: #BDBDBD;
+}
+
+::-webkit-input-placeholder {
+   color: #BDBDBD;
+   font-family: 'Roboto';
 }
 
 .title-bar {
