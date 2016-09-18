@@ -47,8 +47,14 @@ object Renderer extends CategoryView {
 
   def onIconClick(element: Element) = {
     val selectedItemClass = "icon-selected"
-    jQuery(s".icon-container>i.$selectedItemClass").removeClass(selectedItemClass)
-    jQuery(element).addClass(selectedItemClass)
+    if (jQuery(element).hasClass(selectedItemClass)) {
+      jQuery("#bottom-bar").animate(js.Dictionary("bottom" -> "-51px"), 200)
+      jQuery(element).removeClass(selectedItemClass)
+    } else {
+      jQuery("#bottom-bar").animate(js.Dictionary("bottom" -> "0px"), 200)
+      jQuery(s".icon-container>i.$selectedItemClass").removeClass(selectedItemClass)
+      jQuery(element).addClass(selectedItemClass)
+    }
   }
 
   override def renderSideBar(namesHtml: String) = {
@@ -56,6 +62,6 @@ object Renderer extends CategoryView {
   }
 
   override def renderIcons(iconsHtml: String) = {
-    jQuery(".icon-container").empty().append(iconsHtml)
+    jQuery(".icon-container").empty().append(iconsHtml).append("<div id='bottom-bar' class='bottom-bar'></div>")
   }
 }
