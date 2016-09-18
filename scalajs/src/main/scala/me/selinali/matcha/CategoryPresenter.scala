@@ -52,12 +52,12 @@ class CategoryPresenter(view: CategoryView) {
   )
 
   private def bind(icons: List[Icon]) = {
-    val formatter = (s: String, n: String) => s"$s\n<i class='material-icons md-36 md-dark'>$n</i>"
+    val formatter = (s: String, n: String) => s"$s\n<i class='material-icons icon-rounded-corners md-36 md-dark'>$n</i>"
     view.renderIcons(icons.map(_.name.replace(' ', '_')).foldLeft("")(formatter))
   }
 
   private def formatIcon(icon: Icon): String = {
-    "<i class=\"material-icons md-36 md-dark\">" + icon.name.replace(' ', '_') + "</i>\n"
+    "<i class=\"material-icons icon-rounded-corners md-36 md-dark\">" + icon.name.replace(' ', '_') + "</i>\n"
   }
 
   private def bindCategoriesToSideBar(names: List[String]) = {

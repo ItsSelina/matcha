@@ -33,6 +33,9 @@ object Renderer extends CategoryView {
     jQuery(".side-bar").on("click", "a", (e: JQueryEventObject) => {
       onCategoryClick(e.target.asInstanceOf[Element])
     })
+    jQuery(".icon-container").on("click", "i", (e: JQueryEventObject) => {
+      onIconClick(e.target.asInstanceOf[Element])
+    })
   }
 
   def onCategoryClick(element: Element) = {
@@ -40,6 +43,12 @@ object Renderer extends CategoryView {
     jQuery(s".side-bar>ul>li>a.$selectedItemClass").removeClass(selectedItemClass)
     jQuery(element).addClass(selectedItemClass)
     Presenter.itemClicked(element.id)
+  }
+
+  def onIconClick(element: Element) = {
+    val selectedItemClass = "icon-selected"
+    jQuery(s".icon-container>i.$selectedItemClass").removeClass(selectedItemClass)
+    jQuery(element).addClass(selectedItemClass)
   }
 
   override def renderSideBar(namesHtml: String) = {
