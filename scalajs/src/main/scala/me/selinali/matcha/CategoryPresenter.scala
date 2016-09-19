@@ -47,6 +47,13 @@ class CategoryPresenter(view: CategoryView) {
     case i if Categories.contains(i) => bind(Categories(i))
   }
 
+  def performSearch(input: String) = {
+    view.renderIcons(Categories.map { case (name, icons) =>
+      s"<p class='category-header'>${name.capitalize}</p>${icons.filter(icon =>
+        icon.name.contains(input)).map(formatIcon).mkString}" }.mkString
+    )
+  }
+
   private def bindAll() = view.renderIcons(Categories.map { case (name, icons) =>
     s"<p class='category-header'>${name.capitalize}</p>${icons.map(formatIcon).mkString}" }.mkString
   )

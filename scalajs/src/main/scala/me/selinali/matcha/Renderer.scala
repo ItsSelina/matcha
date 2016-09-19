@@ -30,11 +30,16 @@ object Renderer extends CategoryView {
   @JSExport
   def main() = {
     Presenter.loadCategories()
+
     jQuery(".side-bar").on("click", "a", (e: JQueryEventObject) => {
       onCategoryClick(e.target.asInstanceOf[Element])
     })
     jQuery(".icon-container").on("click", "i", (e: JQueryEventObject) => {
       onIconClick(e.target.asInstanceOf[Element])
+    })
+    jQuery(".search-bar").on("input", () => {
+      val input = jQuery(".search-bar").value().asInstanceOf[String]
+      Presenter.performSearch(input)
     })
   }
 
