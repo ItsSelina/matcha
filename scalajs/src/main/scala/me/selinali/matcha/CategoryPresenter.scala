@@ -24,6 +24,7 @@ import scala.util.{Failure, Success}
 
 trait CategoryView {
   def renderSideBar(namesHtml: String)
+
   def renderIcons(iconsHtml: String)
 }
 
@@ -31,6 +32,8 @@ class CategoryPresenter(view: CategoryView) {
 
   private val All = "All"
   private var Categories: SortedMap[String, List[Icon]] = SortedMap()
+  private val formatter = (s: String, n: String) =>
+    s"$s\n<i class='material-icons icon-rounded-corners md-36 md-dark'>$n</i>"
 
   def loadCategories() = {
     IconApi.fetchCategories().onComplete {
@@ -47,11 +50,16 @@ class CategoryPresenter(view: CategoryView) {
     case i if Categories.contains(i) => bind(Categories(i))
   }
 
-  def performSearch(input: String) = {
-    view.renderIcons(Categories.map { case (name, icons) =>
-      s"<p class='category-header'>${name.capitalize}</p>${icons.filter(icon =>
-        icon.name.contains(input)).map(formatIcon).mkString}" }.mkString
-    )
+  def performSearch(input: String, currentCategory: String) = {
+    if (currentCategory.equals(All)) {
+      view.renderIcons(Categories.map { case (name, icons) => s"<p class='category-header'>${name.capitalize}</p>${
+        icons.filter(_.name.contains(input.toLowerCase)).map(formatIcon).mkString}"}.mkString
+      )
+    } else if (Categories.contains(currentCategory)) {
+      view.renderIcons(Categories(currentCategory)
+          .filter(_.name.contains(input.toLowerCase()))
+          .map(_.name.replace(' ', '_')).foldLeft("")(formatter))
+    }
   }
 
   private def bindAll() = view.renderIcons(Categories.map { case (name, icons) =>
@@ -59,7 +67,6 @@ class CategoryPresenter(view: CategoryView) {
   )
 
   private def bind(icons: List[Icon]) = {
-    val formatter = (s: String, n: String) => s"$s\n<i class='material-icons icon-rounded-corners md-36 md-dark'>$n</i>"
     view.renderIcons(icons.map(_.name.replace(' ', '_')).foldLeft("")(formatter))
   }
 

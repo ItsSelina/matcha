@@ -39,7 +39,7 @@ object Renderer extends CategoryView {
     })
     jQuery(".search-bar").on("input", () => {
       val input = jQuery(".search-bar").value().asInstanceOf[String]
-      Presenter.performSearch(input)
+      Presenter.performSearch(input, jQuery(".sidebar-item-selected").attr("id").asInstanceOf[String])
     })
   }
 
@@ -53,10 +53,10 @@ object Renderer extends CategoryView {
   def onIconClick(element: Element) = {
     val selectedItemClass = "icon-selected"
     if (jQuery(element).hasClass(selectedItemClass)) {
-      jQuery("#bottom-bar").animate(js.Dictionary("bottom" -> "-51px"), 200)
+      jQuery("#bottom-bar").animate(js.Dictionary("bottom" -> "-51px"), 150)
       jQuery(element).removeClass(selectedItemClass)
     } else {
-      jQuery("#bottom-bar").animate(js.Dictionary("bottom" -> "0px"), 200)
+      jQuery("#bottom-bar").animate(js.Dictionary("bottom" -> "0px"), 150)
       jQuery(s".icon-container>i.$selectedItemClass").removeClass(selectedItemClass)
       jQuery(element).addClass(selectedItemClass)
     }
