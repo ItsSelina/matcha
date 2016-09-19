@@ -52,8 +52,9 @@ class CategoryPresenter(view: CategoryView) {
 
   def performSearch(input: String, currentCategory: String) = {
     if (currentCategory.equals(All)) {
-      view.renderIcons(Categories.map { case (name, icons) => s"<p class='category-header'>${name.capitalize}</p>${
-        icons.filter(_.name.contains(input.toLowerCase)).map(formatIcon).mkString}"}.mkString
+      view.renderIcons(Categories.filter(_._2.exists(_.name.contains(input.toLowerCase()))).map {
+        case (name, icons) => s"<p class='category-header'>${name.capitalize}</p>${
+          icons.filter(_.name.contains(input.toLowerCase)).map(formatIcon).mkString}"}.mkString
       )
     } else if (Categories.contains(currentCategory)) {
       view.renderIcons(Categories(currentCategory)

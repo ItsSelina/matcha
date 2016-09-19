@@ -48,15 +48,15 @@ object IconApi {
     "svg"
   )
 
-  def fetchCategories(): Future[List[Category]] = {
+  def fetchCategories(): Future[List[Category]] =
     fetchCategoryNames().flatMap(names => Future.sequence(names.map(fetchCategory)))
-  }
+
 
   def fetchCategory(name: String): Future[Category] = fetchIcons(name).map(Category(name, _))
 
-  private def fetchCategoryNames(): Future[List[String]] = {
+  private def fetchCategoryNames(): Future[List[String]] =
     Ajax.get(treeEndpoint("master")).map(xhr => xhr.responseText).flatMap(parseCategories)
-  }
+
 
   private def parseCategories(jsonString: String): Future[List[String]] = {
     val root = js.JSON.parse(jsonString)
@@ -94,7 +94,6 @@ object IconApi {
     })
   }
 
-  private def extractName(rawName: String): String = {
+  private def extractName(rawName: String): String =
     rawName.split('_').filter(elem => !elem.equals("ic") && !elem.contains("px")).mkString(" ")
-  }
 }
