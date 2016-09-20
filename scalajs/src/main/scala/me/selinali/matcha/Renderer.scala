@@ -25,7 +25,7 @@ import js.annotation.JSExport
 @JSExport
 object Renderer extends CategoryView {
 
-  val Presenter = new CategoryPresenter(this)
+  private val Presenter = new CategoryPresenter(this)
 
   @JSExport
   def main() = {
@@ -43,22 +43,24 @@ object Renderer extends CategoryView {
     })
   }
 
-  def onCategoryClick(element: Element) = {
+  private def onCategoryClick(element: Element) = {
     val selectedItemClass = "sidebar-item-selected"
     jQuery(s".side-bar>ul>li>a.$selectedItemClass").removeClass(selectedItemClass)
     jQuery(element).addClass(selectedItemClass)
     Presenter.itemClicked(element.id)
   }
 
-  def onIconClick(element: Element) = {
+  private def onIconClick(element: Element) = {
     val selectedItemClass = "icon-selected"
     if (jQuery(element).hasClass(selectedItemClass)) {
-      jQuery("#bottom-bar").animate(js.Dictionary("bottom" -> "-51px"), 150)
+      jQuery(".bottom-bar").animate(js.Dictionary("bottom" -> "-51px"), 150)
       jQuery(element).removeClass(selectedItemClass)
     } else {
-      jQuery("#bottom-bar").animate(js.Dictionary("bottom" -> "0px"), 150)
+      jQuery(".bottom-bar").animate(js.Dictionary("bottom" -> "0px"), 150)
       jQuery(s".icon-container>i.$selectedItemClass").removeClass(selectedItemClass)
       jQuery(element).addClass(selectedItemClass)
+
+      jQuery(".bottom-bar").empty().append(s"<p class='icon-name'>${jQuery(element).text().replace('_', ' ').capitalize}</p>")
     }
   }
 
@@ -67,6 +69,6 @@ object Renderer extends CategoryView {
   }
 
   override def renderIcons(iconsHtml: String) = {
-    jQuery(".icon-container").empty().append(iconsHtml).append("<div id='bottom-bar' class='bottom-bar'></div>")
+    jQuery(".icon-container").empty().append(iconsHtml).append("<div class='bottom-bar'></div>")
   }
 }

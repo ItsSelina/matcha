@@ -128,3 +128,12 @@ li {
   margin-top: 26px;
   margin-bottom: 8px;
 }
+
+.icon-name {
+  text-decoration: none;
+  color: #9E9E9E;
+  font-size: 11px;
+  font-family: 'Roboto';
+  margin-left: 12px;
+  margin-top: 18px;
+}
