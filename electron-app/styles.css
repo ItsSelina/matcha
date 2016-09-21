@@ -16,6 +16,21 @@ ul li a {
   font-weight: 500;
   font-size: 12px;
   font-family: 'Roboto';
+  border-radius: 2px;
+}
+
+div div a {
+  text-decoration: none;
+  color: #757575;
+  font-weight: 500;
+  font-size: 11px;
+  font-family: 'Roboto';
+  padding: 6px;
+  margin-top: 12px;
+  margin-left: 2px;
+  margin-right: 2px;
+  float: right;
+  display: inline-block;
 }
 
 li {
@@ -45,10 +60,6 @@ li {
 .search-icon {
   margin: 7px !important;
   padding: 0 !important;
-}
-
-.material-icons.light-gray {
-  color: #BDBDBD;
 }
 
 ::-webkit-input-placeholder {
@@ -81,11 +92,6 @@ li {
   position: fixed;
 }
 
-.material-icons {
-  padding: 8px;
-  margin: 8px;
-}
-
 .material-icons.md-36 {
   font-size: 36px;
 }
@@ -95,11 +101,13 @@ li {
 }
 
 .icon-rounded-corners {
+  padding: 8px;
+  margin: 8px;
   border-radius: 3px;
   cursor: pointer;
 }
 
-.icon-selected {
+.button-selected {
   background: #EEEEEE;
 }
 
@@ -130,10 +138,59 @@ li {
 }
 
 .icon-name {
+  float: left;
   text-decoration: none;
-  color: #9E9E9E;
+  color: #757575;
   font-size: 11px;
   font-family: 'Roboto';
   margin-left: 12px;
   margin-top: 18px;
+}
+
+.vertical-divider {
+  float: right;
+  height: 30px;
+  width: 1px;
+  margin-top: 10px;
+  background: #eee;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+.circular-button-bg {
+  margin-top: 9px;
+  margin-left: 2px;
+  margin-right: 2px;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  float: right;
+}
+
+.circular-button {
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.button-white {
+  background: #fff;
+  height: 18px;
+  width: 18px;
+  border: solid thin #9E9E9E;
+}
+
+.button-black {
+  background: #000;
+  height: 20px;
+  width: 20px;
+}
+
+.download-button {
+  margin-top: 12px;
+  margin-left: 2px;
+  margin-right: 14px;
+  float: right;
+  cursor: pointer;
 }

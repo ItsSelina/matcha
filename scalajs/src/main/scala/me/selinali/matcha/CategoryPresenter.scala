@@ -24,7 +24,7 @@ import scala.util.{Failure, Success}
 
 trait CategoryView {
   def renderSideBar(namesHtml: String)
-
+  def renderBottomBar(bottomBarHtml: String)
   def renderIcons(iconsHtml: String)
 }
 
@@ -61,6 +61,19 @@ class CategoryPresenter(view: CategoryView) {
           .filter(_.name.contains(input.toLowerCase()))
           .map(_.name.replace(' ', '_')).foldLeft("")(formatter))
     }
+  }
+
+  def iconClicked(iconName: String) = {
+    view.renderBottomBar(s"<p class='icon-name'>$iconName</p>" +
+        "<i class='material-icons md-dark download-button'>file_download</i>" +
+        "<div class='vertical-divider'/>" +
+        "<div class='circular-button-bg'><div class='circular-button button-black'/></div>" +
+        "<div class='circular-button-bg button-selected'><div class='circular-button button-white'/></div>" +
+        "<div class='vertical-divider'/>" +
+        "<a href='#'>SVG</a><a href='#' class='button-selected'>PNG</a>" +
+        "<div class='vertical-divider'/>" +
+        "<a href='#'>18dp</a><a href='#'>24dp</a><a href='#'>36dp</a><a href='#' class='button-selected'>48dp</a>" +
+        "<div class='vertical-divider'/>")
   }
 
   private def bindAll() = view.renderIcons(Categories.map { case (name, icons) =>

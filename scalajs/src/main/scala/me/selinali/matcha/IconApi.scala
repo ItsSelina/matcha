@@ -51,12 +51,10 @@ object IconApi {
   def fetchCategories(): Future[List[Category]] =
     fetchCategoryNames().flatMap(names => Future.sequence(names.map(fetchCategory)))
 
-
   def fetchCategory(name: String): Future[Category] = fetchIcons(name).map(Category(name, _))
 
   private def fetchCategoryNames(): Future[List[String]] =
     Ajax.get(treeEndpoint("master")).map(xhr => xhr.responseText).flatMap(parseCategories)
-
 
   private def parseCategories(jsonString: String): Future[List[String]] = {
     val root = js.JSON.parse(jsonString)
