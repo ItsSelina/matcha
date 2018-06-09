@@ -5,7 +5,7 @@ A Mac app for viewing and downloading Material Icons, made with Scala.js and Ele
 
 License
 -------
-    Copyright 2016 Selina Li
+    Copyright 2018 Selina Li
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
